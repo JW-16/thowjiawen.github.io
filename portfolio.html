@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Thow Jia Wen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        :root {
+            --primary: #5d4fec;
+            --secondary: #1a1f4d;
+            --light: #f8edeb;
+            --dark: #2c2f56;
+            --accent: #ff5470;
+            --accent-light: #ffb3c0;
+            --neutral: #e6e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #c8a796;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav.scrolled {
+            background-color: #c8a796;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+            font-family: 'Modern Heritage Display', serif;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+        
+        .mobile-menu-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 100%; /* Start completely off-screen */
+            width: 100%; /* Use viewport width */
+            height: 100%; /* Use viewport height */
+            background-color: var(--secondary);
+            z-index: 9999;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box; /* Include padding in width/height */
+        }
+
+        .mobile-nav.open {
+            transform: translateX(-100vw); /* Slide in exactly one viewport width */
+        }
+
+        .close-mobile-menu {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 10001;
+            transition: transform 0.3s ease;
+        }
+
+        .close-mobile-menu:hover {
+            transform: rotate(90deg);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+        }
+
+        /* Staggered animations */
+        .mobile-nav.open .mobile-nav-links li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-nav.open .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav.open .mobile-nav-links li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-nav.open .mobile-nav-links li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-nav.open .mobile-nav-links li:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-nav.open .mobile-nav-links li:nth-child(5) { transition-delay: 0.5s; }
+
+        .mobile-nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            display: block;
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .no-scroll {
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block !important;
+                position: relative;
+                z-index: 10001;
+            }
+            
+            .nav-links {
+                display: none !important;
+            }
+            
+            .header-content {
+                font-size: 2.5rem; /* Smaller text on mobile */
+                padding: 0 15px;
+            }
+            
+            .header-bg {
+                background-attachment: scroll; /* Disable parallax on mobile */
+            }
+        } 
+
+        /* Portfolio Header */
+        .portfolio-header {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+        }
+
+        .portfolio-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Portfolio Sections */
+        .portfolio-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            clear: both;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 15px auto;
+        }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;               /* Add this */
+            flex-direction: column;      /* Stack children vertically */
+            height: 100%;  
+        }
+
+        .project-card iframe {
+            width: 100%;
+            height: 300px;              /* Set fixed height for video */
+            flex-shrink: 0;             /* Prevent video from shrinking */
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 20px;
+            flex-grow: 1;               /* Make content fill remaining space */
+            display: flex;              /* Nested flex for content */
+            flex-direction: column;  
+       }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 15px;
+            flex-grow: 1;  
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--accent);
+        }
+
+        /* Video Projects */
+        .video-project {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-description {
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .portfolio-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .video-project {
+                grid-template-columns: 1fr;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .type-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1em;
+            background-color: currentColor;
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Contact Bubble */
+        .contact-bubble {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Scroll to Top Bubble */
+        .scroll-to-top-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 50px; /* Positioned left of WhatsApp bubble */
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .scroll-to-top-bubble.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top-bubble:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Poster Design */
+        .poster-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            min-height: 100vh; /* Changed from height to min-height */
+            margin: 0 auto;
+            margin-bottom: 40px; /* Add space between sections */
+            position: relative; /* Add this */
+        }
+
+        .poster-project {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .poster-container {
+            width: 60%;
+            height: auto;
+            max-height: 600px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+
+        /* Responsive Design for Poster Section */
+        @media (max-width: 1024px) {
+            .poster-container {
+                width: 70%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .poster-section {
+                min-height: auto; /* Remove fixed height on mobile */
+                padding: 60px 20px;
+            }
+
+            .poster-project {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .poster-container {
+                width: 80%;
+                max-height: 500px;
+            }
+            
+            .video-description {
+                text-align: center;
+                padding: 20px 10px;
+            }
+            
+            .project-tags {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .poster-section {
+                padding: 40px 10px;
+                margin-bottom: 20px;
+            }
+            
+            .poster-container {
+                width: 95%;
+                max-height: 400px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+        }
+
+        footer {
+            background: var(--darker);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .packaging-container{
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 30px;
+            justify-content: center; 
+        }
+
+        /* Vertical rectangle slideshow */
+        .slideshow-container {
+            width: 70%; /* Takes less width to accommodate vertical aspect */
+            position: relative;
+            flex-shrink: 0;
+            aspect-ratio: 2/3; /* Vertical rectangle ratio (width/height) */
+            min-height: 50px; /* Minimum height */
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Show full image without cropping */
+            background: #f5f5f5; /* Fallback background */
+        }
+
+        /* Navigation arrows */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 12px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: clamp(14px, 2vw, 18px); /* Responsive font size */
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .slideshow-container {
+                width: 60%; /* Give more space to slideshow on medium screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .media-section {
+                flex-direction: column;
+            }
+            
+            .slideshow-container {
+                width: 100%;
+                aspect-ratio: 16/9; /* Wider aspect ratio for mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .prev, .next {
+                padding: 8px;
+            }
+        }
+
+        .attractive-btn {
+            /* Base Styles */
+            padding: clamp(12px, 2vw, 15px) clamp(20px, 3vw, 30px); /* Responsive padding */
+            font-size: clamp(14px, 2vw, 16px); /* Responsive font size */
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 1s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease-out 8s forwards;
+        }
+
+        /* Animation to show after delay */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .attractive-btn:hover {
+            /* Hover Effects */
+            transform: translateY(-3px) !important; /* Important to override animation */
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #a777e3, #6e8efb);
+        }
+
+        .attractive-btn:active {
+            /* Click Effect */
+            transform: translateY(1px) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Optional Ripple Effect */
+        .attractive-btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        .attractive-btn:hover::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            .attractive-btn {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+            
+            .attractive-btn:hover {
+                transform: translateY(-2px) !important;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav id="main-nav">
+        <div class="nav-container">
+            <a href="#home" class="logo">THOW JIA WEN</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Work Experience</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-mobile-menu" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Work Experience</a></li>
+            <li><a href="#hobbies">Hobbies</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+
+    <!-- Portfolio Header -->
+    <header class="portfolio-header">
+        <div>
+            <h1 id="typing-title"></h1>
+            <p id="typing-description"></p>
+            <br>
+            <button class="attractive-btn delayed-button" onclick="window.open('https://heyzine.com/flip-book/23b0cac9b3.html', '_blank')">View More Portfolio</button>
+        </div>
+    </header>
+
+    <!-- Design Presentations Section -->
+    <section class="portfolio-section">
+        <h2 class="section-title">Website Design</h2>
+        <div class="project-grid">
+            <div class="project-card" data-aos="fade-up">
+                <iframe src="Honda - homepage .mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="project-content">
+                    <h3 class="project-title">Honda</h3>
+                    <p class="project-description">
+                        This group assignment focuses on Honda, featuring the Honda City, Civic, and CR-V. Our website includes a homepage, a loan calculator for easy financing, a latest promotions page, detailed descriptions of each model, and the history of Honda. The site aims to provide a comprehensive and user-friendly experience for Honda enthusiasts and potential buyers.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Figma</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Group work</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <iframe src="Instagraham.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="project-content">
+                    <h3 class="project-title">Instagraham</h3>
+                    <p class="project-description">
+                        Instagraham is a group project that involves creating a website platform where users can add new items from their local folder, create albums, select, edit, and delete items. The site aims to provide an intuitive interface for users to manage and organize their media easily and efficiently.                    </p>
+                    <div class="project-tags">
+                        <span class="tag">HTML</span>
+                        <span class="tag">PHP</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Group work</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="poster-section">
+        <h2 class="section-title">Poster Design</h2>
+            <div class="poster-project" data-aos="fade-up">
+                <div class="poster-container">
+                    <img src="FairyPos.png" alt="Poster" class="poster-media">
+                </div>
+                <div class="video-description">
+                    <h3 class="project-title">A Cup of Fairytales</h3>
+                    <p class="project-description">
+                        A Cup of Fairytales is a whimsical café that brings fairy tale stories to life through themed drinks, desserts, and an enchanting atmosphere. The grand opening poster features a magical castle design with sparkling elements to capture the essence of fairy tales and create excitement for the upcoming opening on August 31, 2024.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Group work</span>
+                        <span class="tag">Digital Art</span>
+                        <span class="tag">Poster Design</span>
+                        <span class="tag">Adobe Photoshop</span>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section class="portfolio-section">
+        <h2 class="section-title">Packaging Design</h2>
+        <div class="video-project" data-aos="fade-up">
+            <div class="packaging-container">
+                <div class="slideshow-container">
+                    <div class="slide fade">
+                        <img src="packaging design.png" alt="Slide 1">
+                    </div>
+                    <div class="slide fade">
+                        <img src="packaging design2.png" alt="Slide 2">
+                    </div>
+                    <div class="slide fade">
+                        <img src="packaging design3.png" alt="Slide 3">
+                    </div>
+                    
+                    <a class="prev" onclick="plusSlides(-1)">❮</a>
+                    <a class="next" onclick="plusSlides(1)">❯</a>
+                </div>            </div>
+            <div class="video-description">
+                <h3 class="project-title">Packaging Design - redesign Burberry Her Series
+                </h3>
+                <p class="project-description">
+                    This project reimagines the packaging for the Burberry Her series, blending elegance with a touch of surprise. The design features a unique opening experience with a ribbon reveal, enhancing the sense of luxury. A collectible gift card is included inside, offering a personal and memorable touch. Inspired by floral elements, the packaging showcases soft, feminine visuals paired with clear and modern labeling, aligning with the fragrance's romantic essence while elevating its unboxing experience.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Handcraft</span>
+                    <span class="tag">Group work</span>
+                    <span class="tag">Adobe Photoshop</span>
+                    <span class="tag">Adobe Illustrator</span>                   
+                </div>
+            </div>
+        </div>    
+
+    <!--<section class="portfolio-section">
+        <h2 class="section-title">Game Development</h2>
+        <div class="video-project" data-aos="fade-up">
+            <div class="video-container">
+                <iframe src="MyProject4   2024-12-18 16-47-25.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-description">
+                <h3 class="project-title">The Dark Journey: An Exposure Therapy Game for Nyctophobia
+                </h3>
+                <p class="project-description">
+                    The Dark Journey is an innovative 3D game designed as an exposure therapy tool. The game features progressively challenging tunnel environments with mild jump scares and eerie sound effects to help users build resilience in a controlled setting. Targeting teens and middle-aged adults, it provides a safe, immersive experience while excluding high-risk individuals. By simulating fear triggers gradually, this therapeutic game aims to reduce anxiety, improve coping mechanisms, and enhance quality of life for phobia sufferers.                 
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Group work</span>
+                    <span class="tag">Unreal Engine</span>
+                    <span class="tag">Epic Games</span>
+                    <span class="tag">Meshy</span>
+                    <span class="tag">Maximo</span>
+                    <span class="tag">Fab</span>                    
+                    
+                </div>
+            </div>
+        </div>-->    
+
+
+            <div class="scroll-to-top-bubble">
+                <i class="fas fa-arrow-up"></i>
+            </div>
+            
+            <!-- Floating Contact Bubble -->
+            <div class="contact-bubble" data-aos="fade-up" data-aos-delay="700">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+    </section>
+
+            <footer>
+                <div class="footer-content">
+                    <p>&copy; 2025 <span class="highlight">Thow Jia Wen</span>. All rights reserved.</p>
+                </div>
+            </footer>
+
+
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu elements
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileNav = document.getElementById('mobileNav');
+            const overlay = document.getElementById('overlay');
+            
+            // Toggle mobile menu
+            function toggleMenu() {
+                mobileNav.classList.toggle('open');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+            }
+
+            // Event listeners
+            if (mobileMenuBtn && mobileNav && closeMobileMenu) {
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                closeMobileMenu.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu);
+            }
+            
+            // Close mobile menu when clicking on links
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('open');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                });
+            });
+            
+            // Handle all navigation links
+            document.querySelectorAll('a[href^="#"], a[href="portfolio.html"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetHref = this.getAttribute('href');
+                    
+                    // Close mobile menu
+                    if (mobileNav) {
+                        mobileNav.classList.remove('open');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('no-scroll');
+                    }
+                    
+                    // Handle portfolio link separately
+                    if (targetHref === 'portfolio.html') {
+                        window.location.href = 'portfolio.html';
+                        return;
+                    }
+                    
+                    // Handle section links
+                    if (targetHref === '#home') {
+                        // If we're already on index.html, scroll to top
+                        if (window.location.pathname.endsWith('index.html')) {
+                            window.scrollTo({
+                                top: 0,
+                                behavior: 'smooth'
+                            });
+                            history.pushState(null, null, 'index.html');
+                        } else {
+                            // Otherwise, navigate to index.html
+                            window.location.href = 'index.html';
+                        }
+                    } else {
+                        // For other section links
+                        if (window.location.pathname.endsWith('index.html')) {
+                            // On index.html - scroll to section
+                            const targetElement = document.querySelector(targetHref);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({
+                                    behavior: 'smooth'
+                                });
+                                history.pushState(null, null, `index.html${targetHref}`);
+                            }
+                        } else {
+                            // Not on index.html - navigate to index.html with hash
+                            window.location.href = `index.html${targetHref}`;
+                        }
+                    }
+                });
+            });
+            
+            // Handle page load with hash in URL
+            if (window.location.pathname.endsWith('index.html') && window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const titleElement = document.getElementById('typing-title');
+        const descriptionElement = document.getElementById('typing-description');
+        
+        const titleText = "My Portfolio";
+        const descriptionText = "A collection of my creative works, including video recordings, posters, and design presentations";
+        
+        // Function to type text with cursor effect
+        function typeWriter(element, text, speed, callback) {
+            let i = 0;
+            element.innerHTML = ''; // Clear existing content
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML = text.substring(0, i + 1) + `<span class="type-cursor"></span>`;
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    element.innerHTML = text; // Remove cursor when done
+                    if (callback) callback();
+                }
+            }
+            
+            type();
+        }
+        
+        // Start typing the title first
+        typeWriter(titleElement, titleText, 100, function() {
+            // After title finishes, start typing the description
+            setTimeout(() => {
+                typeWriter(descriptionElement, descriptionText, 50);
+            }, 500); // Short pause between sentences
+        });
+    });
+
+        // Add this JavaScript to handle scroll-to-top functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollToTopBtn = document.querySelector('.scroll-to-top-bubble');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+            
+            // Smooth scroll to top
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
+
+        // Auto-advance slides (optional)
+        setInterval(() => plusSlides(1), 5000);
+        
+    </script>
+</body>
+</html>
