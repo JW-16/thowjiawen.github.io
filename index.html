@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thow Jia Wen | Personal Website</title>
+    <meta name="description" content="UX and multimedia designer creating simple, creative digital experiences.">
+    <meta name="author" content="Thow Jia Wen">
+    <meta name="keywords" content="Thow Jia Wen">
+    <link rel="canonical" href="https://www.thowjiawen.com" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.cdnfonts.com/css/bouncy-mate" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        :root {
+            --primary: #5d4fec;       /* Purple-blue */
+            --secondary: #1a1f4d;     /* Dark navy */
+            --light: #f8edeb;         /* Cream */
+            --dark: #2c2f56;          /* Dark blue */
+            --accent: #ff5470;        /* Pink-red */
+            --accent-light: #ffb3c0;  /* Light pink */
+            --neutral: #e6e8f0;       /* Light gray */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        body.no-scroll {
+            width: 100%;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #c8a796;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav.scrolled {
+            background-color: #c8a796;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+            font-family: 'Modern Heritage Display', serif;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+        
+        .mobile-menu-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 100%; /* Start completely off-screen */
+            width: 100%; /* Use viewport width */
+            height: 100%; /* Use viewport height */
+            background-color: var(--secondary);
+            z-index: 9999;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box; /* Include padding in width/height */
+        }
+
+        .mobile-nav.open {
+            transform: translateX(-100vw); /* Slide in exactly one viewport width */
+        }
+
+        .close-mobile-menu {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 10001;
+            transition: transform 0.3s ease;
+        }
+
+        .close-mobile-menu:hover {
+            transform: rotate(90deg);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+        }
+
+        /* Staggered animations */
+        .mobile-nav.open .mobile-nav-links li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-nav.open .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav.open .mobile-nav-links li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-nav.open .mobile-nav-links li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-nav.open .mobile-nav-links li:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-nav.open .mobile-nav-links li:nth-child(5) { transition-delay: 0.5s; }
+
+        .mobile-nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            display: block;
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .no-scroll {
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block !important;
+                position: relative;
+                z-index: 10001;
+            }
+            
+            .nav-links {
+                display: none !important;
+            }
+            
+            .header-content {
+                font-size: 2.5rem; /* Smaller text on mobile */
+                padding: 0 15px;
+            }
+            
+            .header-bg {
+                background-attachment: scroll; /* Disable parallax on mobile */
+            }
+        }        
+
+        /* Header Section */
+        header {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            color: black;
+            text-align: center;
+            overflow: hidden;
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("close-up-female-working-laptop.jpg");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            filter: blur(0px);
+            opacity: 0.7;
+            transition: filter 0.5s ease, opacity 0.5s ease;
+            z-index: -1;
+            object-fit: cover; /* Ensure image covers entire area */
+        }
+
+        .header-bg.blur-active {
+            filter: blur(5px);
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            font-size: 3.5rem;
+            font-weight: 700;
+            padding: 0 20px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .typing-line {
+            display: block;
+            text-align: center;
+            margin-bottom: 10px;
+            min-height: 1.2em;
+            position: relative;
+        }
+
+        .typing-line.active::after {
+            content: '|';
+            display: inline-block;
+            animation: blink 0.7s infinite;
+            color: #ffb6c1;
+            margin-left: 3px;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Scroll Down Arrow */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        .scroll-down.show {
+            animation: fadeIn 1s forwards, bounce 2s infinite 1s;
+        }
+
+        .scroll-down-arrow {
+            width: 30px;
+            height: 50px;
+            border: 2px solid white;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .scroll-down-arrow::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid white;
+            border-bottom: 2px solid white;
+            transform: translateX(-50%) rotate(45deg);
+            animation: arrowPulse 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+
+        @keyframes arrowPulse {
+            0% { 
+                top: 10px;
+                opacity: 1;
+            }
+            100% {
+                top: 20px;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                font-size: 1.5rem;
+            }
+        }
+        /* About Section */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about_section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .about_section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 15px auto;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+        
+        .profile-pic {
+            flex: 0 0 350px;
+        }
+        
+        .profile-pic img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .info-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        /* Skills Section */
+        .skill-container{
+            grid-area: skills;
+        }
+
+        .skills-section {
+            margin-top: 40px;
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .skills-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .skills-section h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-light);
+        }
+        
+        .skills-section h3:not(:first-child) {
+            margin-top: 30px;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .skill-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: var(--neutral);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .skill-name {
+            font-size: 0.95rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .skill-percent {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            min-width: 50px;
+            text-align: right;
+        }
+        
+        .skill-item.active .skill-percent {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-section {
+                padding: 20px;
+            }
+            
+            .skill-item.active .skill-percent {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Experience Section */
+        .experience {
+            padding: 80px 20px; /* Added horizontal padding */
+            position: relative;
+        }
+        
+        .experience_section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--primary);
+            position: relative;
+            opacity: 1; /* Changed from 0 to 1 to ensure visibility */
+            transform: translateY(0); /* Changed from translateY(30px) */
+            transition: all 0.8s ease;
+        }
+                
+        .experience_section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        .experience-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+        
+        .experience-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            min-height: 500px;
+        }
+        
+        .experience-image-container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .experience-image {
+            width: 100%;
+            height: 400px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        .experience-content {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        
+        .experience-item.active .experience-image,
+        .experience-item.active .experience-content {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .experience-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .experience-content h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .company {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .company i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .job-description {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .responsibilities h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .responsibilities ul {
+            list-style: none;
+        }
+        
+        .responsibilities li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.5;
+        }
+        
+        .responsibilities li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .experience-item {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                gap: 50px;
+            }
+            
+            .experience-image {
+                height: 350px;
+            }
+            
+            .experience-content {
+                margin-top: -40px;
+                z-index: 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .experience_section-title {
+                font-size: 2rem;
+            }
+            
+            .experience-content {
+                padding: 30px 20px;
+            }
+            
+            .experience-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            .experience-image {
+                height: 300px;
+            }
+        }
+        /* Hobbies Section */
+        .hobbies {
+            background: transparent;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hobbies::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            
+            pointer-events: none;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--primary);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .section-title.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hobby-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(50px) rotate(5deg);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .hobby-card.active {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+        }
+        
+        .hobby-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(93, 79, 236, 0.15),
+                rgba(255, 84, 112, 0.15));
+            clip-path: circle(0% at 50% 50%);
+            transition: clip-path 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hobby-card:hover::before {
+            clip-path: circle(150% at 50% 50%);
+        }
+        
+        .hobby-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            position: relative;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
+        }
+        
+        .hobby-card.active .hobby-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .hobby-card:hover .hobby-icon {
+            transform: rotateY(360deg) scale(1.1);
+        }
+        
+        .hobby-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--primary);
+            border-bottom-color: var(--accent);
+            animation: rotate 5s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hobby-card h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+        }
+        
+        .hobby-card.active h3 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hobby-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        .hobby-card:hover h3::after {
+            width: 100%;
+        }
+        
+        .hobby-card p {
+            color: var(--dark);
+            line-height: 1.7;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s;
+        }
+        
+        .hobby-card.active p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hobby-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 992px) {
+            .hobbies-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hobby-card {
+                padding: 30px 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hobby-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+        }
+        @media (max-width: 992px) {
+            .experience-item {
+                flex-direction: column;
+            }
+            
+            .experience-date {
+                flex: none;
+                padding: 20px;
+            }
+            
+            .hobbies-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .experience-content {
+                padding: 30px;
+            }
+            
+            .hobby-card {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .experience-date .year {
+                font-size: 2rem;
+            }
+            
+            .experience-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            .hobby-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: #f7edea;
+            color: white;
+            padding: 100px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-wave {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .contact-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 120px;
+        }
+
+        .contact .section-title {
+            color: var(--primary);
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Contact Card */
+        .contact-card {
+            perspective: 1000px;
+            height: 500px;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, var(--light), var(--accent-light));
+            color: rgba(0, 0, 255, 0.5);
+        }
+
+        .card-back {
+            background: #fae0d8;
+            backdrop-filter: blur(10px);
+            transform: rotateY(180deg);
+            color: rgba(0, 0, 255);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .contact-details {
+            width: 100%;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .detail-item i {
+            margin-right: 15px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* Social Card */
+        .social-card {
+            background: #fae0d8c3;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-card h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--accent-light);
+            font-size: 1.5rem;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            color: #1a1f4d;
+            text-decoration: none;
+        }
+
+        .social-item:hover {
+            background: var(--accent);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .social-item i {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Interest Card */
+        .interest-card {
+            background: linear-gradient(135deg, var(--accent-light), var(--light));
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .interest-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .interest-card h3 {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: rgba(0, 0, 255, 0.5);
+        }
+
+        .interest-card h3 i {
+            margin-right: 15px;
+            color: rgba(0, 0, 255, 0.5);
+        }
+
+        .interest-card p{
+            color: rgba(0, 0, 255, 0.5);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button i {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Contact Bubble */
+        .contact-bubble {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Scroll to Top Bubble */
+        .scroll-to-top-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 50px; /* Positioned left of WhatsApp bubble */
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .scroll-to-top-bubble.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top-bubble:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-card {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact {
+                padding: 80px 20px 40px;
+            }
+        }
+
+        .educational-section {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.educationlevel_title {
+  text-align: center;
+  font-size: 2.5em;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Timeline Design */
+.timeline {
+  position: relative;
+  padding-left: 50px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 25px;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: #3498db;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-icon {
+  position: absolute;
+  left: -50px;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border: 2px solid #3498db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+}
+
+.timeline-content h2 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.timeline-meta {
+  color: #7f8c8d;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.details.active {
+  max-height: 800px;
+  overflow: auto;
+}
+
+.details ul {
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.details li {
+  margin-bottom: 8px;
+}
+
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .about-content {
+      flex-direction: column;
+      gap: 30px;
+  }
+
+  .profile-pic {
+      flex: 0 0 auto;
+      max-width: 250px;
+      margin: 0 auto;
+  }
+
+  .profile-pic img {
+      height: 250px;
+  }
+
+  .info-grid {
+      grid-template-columns: 1fr;
+  }
+
+  .timeline {
+      padding-left: 30px;
+  }
+
+  .timeline-item {
+      padding: 20px;
+  }
+
+  .timeline-content h2 {
+      font-size: 1.3rem;
+  }
+
+  .timeline-meta {
+      font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about_section-title,
+  .educationlevel_title h2 {
+      font-size: 2rem;
+  }
+
+  .timeline-icon {
+      width: 30px;
+      height: 30px;
+      font-size: 1rem;
+  }
+
+  .timeline-content h2 {
+      font-size: 1.2rem;
+  }
+
+  .timeline-meta {
+      font-size: 0.8rem;
+  }
+}
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav id="main-nav">
+        <div class="nav-container">
+            <a href="#home" class="logo">THOW JIA WEN</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Work Experience</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-mobile-menu" id="closeMobileMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Work Experience</a></li>
+            <li><a href="#hobbies">Hobbies</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+
+    <header id="home">
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <div id="line1" class="typing-line"></div>
+            <div id="line2" class="typing-line"></div>
+        </div>
+        <div class="scroll-down" onclick="scrollToSection('about')">
+            <div class="scroll-down-arrow"></div>
+        </div>
+    </header>
+
+    <main class="main-wrapper">
+        <!-- About Section -->
+        <section id="about" class="about">
+            <h2 class="about_section-title">About Me</h2>
+            <div class="about-content">
+                <!-- Profile Picture and Basic Info -->
+                <div class="profile-pic" data-aos="flip-left" data-aos-duration="800">
+                    <img src="me_last.png" alt="Profile Image">
+                </div>
+                <div class="about-text" data-aos="fade-left" data-aos-delay="300">
+                    <p>Hi, My name is Thow Jia Wen, and I am a Bachelor's degree student in Multimedia Computing. I have developed strong technical skills in programming, working with languages such as HTML, PHP, CSS, JavaScript, and Java to create functional and interactive projects. Alongside coding, I have explored creative design using software like Adobe Illustrator, Photoshop, and Animate, enabling me to craft engaging visuals and animations. This blend of development and design skills allows me to approach projects holistically, balancing functionality and aesthetics.</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-user"></i>
+                            <span>THOW JIA WEN</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+60 12-373 8718</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>jiawenthow@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Bsc(Hons) Multimedia Computing (Current)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="skills-container">
+                <div class="skills-section">
+                    <h3>Design Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <span class="skill-name">Adobe Photoshop</span>
+                            <span class="skill-percent" data-percent="90">0%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Adobe Illustrator</span>
+                            <span class="skill-percent" data-percent="85">0%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Adobe Indesign</span>
+                            <span class="skill-percent" data-percent="80">0%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Adobe Animate</span>
+                            <span class="skill-percent" data-percent="80">0%</span>
+                        </div>
+                        
+                    </div>
+
+                    <h3>Programming Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <span class="skill-name">HTML/CSS</span>
+                            <span class="skill-percent" data-percent="95">0%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">PHP</span>
+                            <span class="skill-percent" data-percent="85">0%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MySQL</span>
+                            <span class="skill-percent" data-percent="80">0%</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-percent" data-percent="75">0%</span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div class="educational-section fade-in-section">
+                <div class="educational-section">
+                    <div class="educationlevel_title">
+                        <h2 class="experience_section-title">Education Level</h2>
+                    </div>
+                    <div class="timeline">
+                        <div class="timeline-item" onclick="toggleDetails('degree')">
+                            <div class="timeline-icon">🎓</div>
+                            <div class="timeline-content">
+                                <h2>Bachelor Degree in Multimedia Computing</h2>
+                                <p class="timeline-meta">YPC INTERNATIONAL COLLEGE @ LIVERPOOL JOHNS MOORES UNIVERSITY | 2022 - Present</p>
+                                <div id="degree-details" class="details">
+                                    <ul>
+                                        <li>Specialization: UX Design, Multimedia and Programming</li>
+                                        <li>Expected Graduation: 2026</li>
+                                        <li>Sem 1 - 3 : CGPA: 3.22</li>
+                                        <li>Sem 4 - 6 : CGPA: 3.61</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" onclick="toggleDetails('foundation')">
+                            <div class="timeline-icon">🎓</div>
+                            <div class="timeline-content">
+                                <h2>Foundation in Business & Information Technology</h2>
+                                <p class="timeline-meta">YPC INTERNATIONAL COLLEGE @ LIVERPOOL JOHNS MOORES UNIVERSITY | 2021 - 2022</p>
+                                <div id="foundation-details" class="details">
+                                    <ul>
+                                        <li>Graduate with CGPA: 3.42</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" onclick="toggleDetails('secondary')">
+                            <div class="timeline-icon">🎓</div>
+                            <div class="timeline-content">
+                                <h2>Secondary </h2>
+                                <p class="timeline-meta">SMK Taman Connaught | 2016 - 2020</p>
+                                <div id="secondary-details" class="details">
+                                    <ul>
+                                        <li>SPM: 3A4B1C</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience">
+            <h2 class="experience_section-title">Work Experience</h2>
+            <div class="experience-container">
+                <!-- Experience Item 1 -->
+                <div class="experience-item">
+                    <div class="experience-image-container">
+                        <img src="8449776_3907915.jpg" 
+                            alt="Team Meeting" 
+                            class="experience-image">
+                    </div>
+                    <div class="experience-content">
+                        <h3>Teaching Assistant and Tuition Teacher</h3>
+                        <div class="company">
+                            <i class="fas fa-building"></i>
+                            <span>TSK Daycare Centre Sdn Bhd | Apr 24 ~ May 24</span>
+                        </div>
+                        <div class="responsibilities">
+                            <h4>Key Responsibilities:</h4>
+                            <ul>
+                                <li>Prepare exercise work book for children</li>
+                                <li>Help in school homework guidance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience Item 2 -->
+                <div class="experience-item">
+                    <div class="experience-image-container">
+                        <img src="13820921_1908.i514.005..Pharmacy isometric composition.jpg" 
+                            alt="Creative Work" 
+                            class="experience-image">
+                    </div>
+                    <div class="experience-content">
+                        <h3>Sales Assistant</h3>
+                        <div class="company">
+                            <i class="fas fa-building"></i>
+                            <span>Servicare Pharmacy | Aug 23 ~ Apr 24</span>
+                        </div>
+                        <div class="responsibilities">
+                            <h4>Key Responsibilities:</h4>
+                            <ul>
+                                <li>Arrange goods and check stock available</li>
+                                <li>Work as cashier</li>
+                                <li>Stock take and separate based on type and brand of goods</li>
+                                <li>Offer health test services: Glucose, Cholesterol, Uric Acid, Blood Pressure</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience Item 3 -->
+                <div class="experience-item">
+                    <div class="experience-image-container">
+                        <img src="12862764_cuteanimated-60.jpg" 
+                            alt="Design Process" 
+                            class="experience-image">
+                    </div>
+                    <div class="experience-content">
+                        <h3>Telemarketer cum Admin Coordinator</h3>
+                        <div class="company">
+                            <i class="fas fa-building"></i>
+                            <span>YPC International College | Apr 22 ~ Aug 22</span>
+                        </div>
+                        
+                        <div class="responsibilities">
+                            <h4>Key Responsibilities:</h4>
+                            <ul>
+                                <li>Inviting students to participate in scholarship interview via phone calling and WhatsApp blast</li>
+                                <li>Help in organize event</li>
+                                <li>Help in setting up booth and stands to promote YPC International Collge on the event </li>
+                                <li>Arrange student data and print data</li>
+                                <li>Visit difference school to promote with students to join YPC</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Hobbies Section -->
+        <section id="hobbies" class="hobbies">
+            <h2 class="section-title">My Hobbies</h2>
+            <div class="hobbies-container">
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>Travelling</h3>
+                    <p>I love exploring new cultures and landscapes. My recent trips include Malaysia Island, Thailand, and Korea. Travel inspires my design work by exposing me to different aesthetics and perspectives. I particularly enjoy documenting my travels through photography local architecture.</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Reading</h3>
+                    <p>I enjoy reading psychology, and fiction. Some favorites include "Don't Make Me Think" by Steve Krug and "The Design of Everyday Things" by Don Norman</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Digital Art</h3>
+                    <p>I learned digital illustration through a previous assignment, which sparked my interest in visual design. It encouraged me to explore various styles and techniques that now influence my creative work.</p>                </div>
+            </div>
+        </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-wave">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#fdb5b7"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="#fec7c5"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#fdb5b7"></path>
+            </svg>
+        </div>
+        <br>
+        <h2 class="section-title" data-aos="fade-down">Get In Touch</h2>
+        
+        <div class="contact-content">
+            <!-- Contact Card -->
+            <div class="contact-card" data-aos="fade-right" data-aos-delay="100">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="contact-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <h3>Contact Me</h3>
+                        <p>Tap to reveal contact details</p>
+                    </div>
+                    <div class="card-back">
+                        <div class="contact-details">
+                            <div class="detail-item" data-aos="fade-up" data-aos-delay="100">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Pandan Perdana, Kuala Lumpur</span>
+                            </div>
+                            <div class="detail-item" data-aos="fade-up" data-aos-delay="150">
+                                <i class="fas fa-phone"></i>
+                                <span>+60 12-373 8718</span>
+                            </div>
+                            <div class="detail-item" data-aos="fade-up" data-aos-delay="200">
+                                <i class="fas fa-envelope"></i>
+                                <span>jiawenthow@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Media Card -->
+            <div class="social-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Connect With Me</h3>
+                <div class="social-grid">
+                    <a href="https://www.linkedin.com/in/thow-jia-wen-50b358281" class="social-item" data-aos="zoom-in" data-aos-delay="300">
+                        <i class="fab fa-linkedin-in"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://wa.me/60123738718" class="social-item" data-aos="zoom-in" data-aos-delay="350">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>Whatsapp</span>
+                    </a>
+                    <a href="https://www.facebook.com/share/16MD5xbEfu/" class="social-item" data-aos="zoom-in" data-aos-delay="400">
+                        <i class="fab fa-facebook"></i>
+                        <span>facebook</span>
+                    </a>
+                    <a href="https://discord.gg/6GXxqkTz" class="social-item" data-aos="zoom-in" data-aos-delay="450">
+                        <i class="fa-brands fa-discord"></i>
+                        <span>Discord</span>
+                    </a>
+                    <a href="https://www.instagram.com/jiawen1603?igsh=MWJoYXVkazU1MXE2cg==" class="social-item" data-aos="zoom-in" data-aos-delay="500">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://drive.google.com/file/d/1WZttfRa85LV5V3ffAXdFTj1onNTQ9bfY/view?usp=drive_link" class="social-item" data-aos="zoom-in" data-aos-delay="550">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>Resume</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Job Interest Card -->
+            <div class="interest-card" data-aos="fade-left" data-aos-delay="300">
+                <div class="interest-content">
+                    <h3><i class="fas fa-briefcase"></i> Job Interests</h3>
+                    <p>I'm currently looking for opportunities as a <strong>UX Designer</strong> or <strong>Multimedia Designer</strong> with innovative companies that value user-centered design.</p>
+                    <div class="cta-button" data-aos="zoom-in" data-aos-delay="600">
+                        <span>Let's Collaborate</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-to-top-bubble">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+        
+        <!-- Floating Contact Bubble -->
+        <div class="contact-bubble" data-aos="fade-up" data-aos-delay="700">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </section>
+</main>
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2025 <span class="highlight">Thow Jia Wen</span>. All rights reserved.</p>
+    </div>
+</footer>
+    <script>
+        const textLines = [
+            "Hi, My Name is Thow Jia Wen.",
+            "Junior UX Designer & Web Designer"
+        ];
+        let currentLine = 0;
+        let index = 0;
+        let typingSpeed = 100;
+        let lineDelay = 500;
+        const bgElement = document.querySelector('.header-bg');
+
+        function typeEffect() {
+            if (currentLine === 0 && index === 0) {
+                // Apply blur when typing starts
+                bgElement.classList.add('blur-active');
+            }
+
+            if (currentLine < textLines.length) {
+                const element = document.getElementById(`line${currentLine + 1}`);
+                
+                // Activate cursor for current line
+                element.classList.add('active');
+                
+                if (index < textLines[currentLine].length) {
+                    element.textContent += textLines[currentLine].charAt(index);
+                    index++;
+                    setTimeout(typeEffect, typingSpeed);
+                } else {
+                    // Finished current line
+                    element.classList.remove('active');
+                    currentLine++;
+                    index = 0;
+                    if (currentLine < textLines.length) {
+                        setTimeout(typeEffect, lineDelay);
+                    } else {
+                        // All typing complete - show scroll arrow and clear blur
+                        bgElement.classList.remove('blur-active');
+                        document.querySelector('.scroll-down').classList.add('show');
+                    }
+                }
+            }
+        }
+        
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Start typing when page loads
+        window.onload = typeEffect;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Title is now visible by default (no need to activate)
+            console.log('Title should be visible without JavaScript');
+            
+            // 2. Set up scroll animations for experience items
+            const experienceItems = document.querySelectorAll('.experience-item');
+            
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe each experience item
+            experienceItems.forEach(item => {
+                observer.observe(item);
+            });
+
+            // 3. Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillsSection = document.querySelector('.skills-section');
+            const skillItems = document.querySelectorAll('.skill-item');
+            const skillPercents = document.querySelectorAll('.skill-percent');
+            
+            let animationTriggered = false;
+            
+            // Intersection Observer for skills section
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !animationTriggered) {
+                        skillsSection.classList.add('active');
+                        
+                        // Animate each skill item with delay
+                        skillItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('active');
+                                
+                                // Animate percentage number
+                                const percentElement = item.querySelector('.skill-percent');
+                                const targetPercent = percentElement.getAttribute('data-percent');
+                                animateValue(percentElement, 0, targetPercent, 1000);
+                                
+                            }, index * 150); // Staggered delay
+                        });
+                        
+                        animationTriggered = true;
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px 0px -100px 0px'
+            });
+            
+            if (skillsSection) {
+                observer.observe(skillsSection);
+            }
+            
+            // Function to animate percentage numbers
+            function animateValue(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    element.textContent = value + '%';
+                    
+                    // Dynamic font size scaling
+                    const scale = 1 + (progress * 0.8); // Scale up to 1.8x
+                    element.style.transform = `scale(${scale})`;
+                    
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        element.style.transform = ''; // Reset transform after animation
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const sectionTitle = document.querySelector('.hobbies .section-title');
+            const hobbyCards = document.querySelectorAll('.hobby-card');
+            
+            // Intersection Observer for hobbies section
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate title
+                        sectionTitle.classList.add('active');
+                        
+                        // Animate cards with staggered delay
+                        hobbyCards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('active');
+                            }, index * 200);
+                        });
+                        
+                        // Optional: Unobserve after animation
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px 0px -100px 0px'
+            });
+            
+            if (sectionTitle) {
+                observer.observe(document.querySelector('.hobbies'));
+            }
+        });
+
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Add this JavaScript to handle scroll-to-top functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollToTopBtn = document.querySelector('.scroll-to-top-bubble');
+            
+            // Show/hide button based on scroll position
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            });
+            
+            // Smooth scroll to top
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu elements
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            const closeBtn = document.getElementById('closeMobileMenu');
+            const overlay = document.getElementById('overlay');
+
+            // Menu toggle function
+            function toggleMenu() {
+                mobileNav.classList.toggle('open');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+            }
+
+            // Event listeners
+            if (mobileMenuBtn && mobileNav && closeBtn) {
+                mobileMenuBtn.addEventListener('click', toggleMenu);
+                closeBtn.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu);
+            }
+
+            // Close menu when clicking on links
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('open');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                });
+            });
+
+            // Navigation links
+            document.querySelectorAll('a[href^="#"], a[href="portfolio.html"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetHref = this.getAttribute('href');
+                    
+                    // Close mobile menu
+                    if (mobileNav) {
+                        mobileNav.classList.remove('open');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('no-scroll');
+                    }
+                    
+                    // Handle navigation
+                    if (targetHref === '#home') {
+                        window.location.href = 'index.html';
+                    } else if (targetHref === 'portfolio.html') {
+                        window.location.href = 'portfolio.html';
+                    } else {
+                        const targetElement = document.querySelector(targetHref);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                            history.pushState(null, null, `index.html${targetHref}`);
+                        }
+                    }
+                });
+            });
+        });
+
+        function toggleDetails(id) {
+        const details = document.getElementById(id);
+        if (!details) return; // Exit if element not found
+        
+        details.classList.toggle('active');
+        
+        // Optional: Close other open sections
+        document.querySelectorAll('.details').forEach(item => {
+            if (item.id !== id && item.classList.contains('active')) {
+            item.classList.remove('active');
+            }
+        });
+        }
+
+        // Initialize the first item of each section
+        document.addEventListener('DOMContentLoaded', function() {
+        // Expand first degree item
+        const firstDegree = document.getElementById('degree-details');
+        if (firstDegree) firstDegree.classList.add('active');
+        
+        // Expand first foundation item
+        const firstFoundation = document.getElementById('foundation-details');
+        if (firstFoundation) firstFoundation.classList.add('active');
+        
+        // Expand first secondary item
+        const firstSecondary = document.getElementById('secondary-details');
+        if (firstSecondary) firstSecondary.classList.add('active');
+        
+        // Add keyboard accessibility
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const clickHandler = this.getAttribute('onclick');
+                const idMatch = clickHandler.match(/'([^']+)'/);
+                if (idMatch && idMatch[1]) {
+                toggleDetails(idMatch[1]);
+                }
+            }
+            });
+            
+            // Add ARIA attributes
+            const clickHandler = item.getAttribute('onclick');
+            const idMatch = clickHandler.match(/'([^']+)'/);
+            if (idMatch && idMatch[1]) {
+            const details = document.getElementById(idMatch[1]);
+            if (details) {
+                item.setAttribute('aria-expanded', details.classList.contains('active').toString());
+                item.setAttribute('aria-controls', idMatch[1]);
+            }
+            }
+        });
+        
+        // Update ARIA attributes when transitions complete
+        document.querySelectorAll('.details').forEach(details => {
+            details.addEventListener('transitionend', function() {
+            const parentItem = this.closest('.timeline-item');
+            if (parentItem) {
+                parentItem.setAttribute('aria-expanded', this.classList.contains('active').toString());
+            }
+            });
+        });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade in entire education section
+            const educationSection = document.querySelector('.educational-section');
+            
+            // Intersection Observer for main section
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Animate timeline items sequentially
+                        const timelineItems = entry.target.querySelectorAll('.timeline-item');
+                        timelineItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, index * 200); // 200ms delay between each item
+                        });
+                        
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            if (educationSection) {
+                sectionObserver.observe(educationSection);
+            }
+
+            // Your existing toggleDetails function
+            function toggleDetails(id) {
+                const details = document.getElementById(`${id}-details`);
+                details.classList.toggle('active');
+                
+                // Optional: Close other open sections
+                document.querySelectorAll('.details').forEach(item => {
+                    if (item.id !== `${id}-details` && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Make toggleDetails available globally
+            window.toggleDetails = toggleDetails;
+        });
+
+    </script>
+</body>
+</html>
