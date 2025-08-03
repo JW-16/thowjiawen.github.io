@@ -247,7 +247,7 @@
         /* Portfolio Header */
         .portfolio-header {
             height: 60vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('bg.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/bg.jpg');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -518,7 +518,7 @@
         .poster-container {
             width: 60%;
             height: auto;
-            max-height: 600px;
+            max-height: 700px;
             overflow: hidden;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -840,7 +840,6 @@
         }
 
 
-
     </style>
 </head>
 <body>
@@ -892,38 +891,89 @@
     <section class="portfolio-section">
         <h2 class="section-title">Website Design</h2>
         <div class="project-grid">
-            <div class="project-card" data-aos="fade-up">
-                <iframe src="Honda - homepage .mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Honda</h3>
-                    <p class="project-description">
-                        This group assignment focuses on Honda, featuring the Honda City, Civic, and CR-V. Our website includes a homepage, a loan calculator for easy financing, a latest promotions page, detailed descriptions of each model, and the history of Honda. The site aims to provide a comprehensive and user-friendly experience for Honda enthusiasts and potential buyers.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Figma</span>
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Group work</span>
+            <div class="project-card" data-aos="fade-up">     
+                <div class="game-project">
+                    <div class="game-slideshow-container">
+                        <!-- Each slide has proper structure -->
+                        <div class="game-slide active">
+                            <img src="img/nutribite_alert.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/nutribites_homepage1.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/nutribites_productpage.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/nutribites_product.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/nutribite_checkout.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/nutribite_thankyou.png" />
+                        </div>
+                        
+                        
+                        <div class="game-nav-buttons">
+                            <button class="prev" onclick="plusGameSlides(-1)">❮</button>
+                            <button class="next" onclick="plusGameSlides(1)">❯</button>
+                        </div>
                     </div>
                 </div>
+            <div class="project-content">
+                <h3 class="project-title">NutriBites</h3>
+                <p class="project-description">
+                    NutriBites delivers nutrient-rich organic snacks, including nuts, seeds, and dried fruits—free from additives. It designed using Wix, the content is clean and focused, with no unnecessary clutter. NutriBites promotes convenient, healthy snacking for any lifestyle, combining great taste with natural ingredients to support everyday wellness.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">WIX</span>
+                    <a href="https://thowjiawen.wixsite.com/nutribites-1" target="_blank">
+                        <img src="img/link-icon-circle-chain-logo-260nw-787378579-removebg-preview.png" style="width: 30px; height: 30px;">
+                    </a>
+                </div>
             </div>
+        </div>
 
-            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                <iframe src="Instagraham.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <div class="project-content">
-                    <h3 class="project-title">Instagraham</h3>
-                    <p class="project-description">
-                        Instagraham is a group project that involves creating a website platform where users can add new items from their local folder, create albums, select, edit, and delete items. The site aims to provide an intuitive interface for users to manage and organize their media easily and efficiently.                    </p>
-                    <div class="project-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">PHP</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">MySQL</span>
-                        <span class="tag">Group work</span>
-
+            <div class="project-card" data-aos="fade-up">     
+                <div class="game-project">
+                    <div class="game-slideshow-container">
+                        <!-- Each slide has proper structure -->
+                        <div class="game-slide active">
+                            <img src="img/moonlight1.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/moonlight2.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/moonlight3.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/moonlight4.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/moonlight5.png" />
+                        </div>
+                        <div class="game-slide">
+                            <img src="img/moonlight6.png" />
+                        </div>
+                        
+                        
+                        <div class="game-nav-buttons">
+                            <button class="prev" onclick="plusGameSlides(-1)">❮</button>
+                            <button class="next" onclick="plusGameSlides(1)">❯</button>
+                        </div>
                     </div>
+                </div>
+            <div class="project-content">
+                <h3 class="project-title">Moonlight</h3>
+                <p class="project-description">
+                    Moonlight is a website that highlights zodiac signs like Gemini, Pisces, Cancer, Aries, and Aquarius, offering personalized insights.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">JavaScript</span>
                 </div>
             </div>
         </div>
@@ -933,7 +983,7 @@
         <h2 class="section-title">Poster Design</h2>
             <div class="poster-project" data-aos="fade-up">
                 <div class="poster-container">
-                    <img src="FairyPos.png" alt="Poster" class="poster-media">
+                    <img src="img/FairyPos.png" alt="Poster" class="poster-media">
                 </div>
                 <div class="video-description">
                     <h3 class="project-title">A Cup of Fairytales</h3>
@@ -951,18 +1001,66 @@
     </section>
 
     <section class="portfolio-section">
+        <h2 class="section-title">Prototype Design</h2>
+            <div class="video-project" data-aos="fade-up">
+                <div class="packaging-container">
+                    <div class="slideshow-container">
+                            <div class="slide fade">
+                                <img src="img/fos_1.png" />
+                            </div>
+                            <div class="slide fade">
+                                <img src="img/fos_2.png" />
+                            </div>
+                            <div class="slide fade">
+                                <img src="img/fos_4.png" />
+                            </div>
+                            <div class="slide fade">
+                                <img src="img/fos_3.png" />
+                            </div>
+                            <div class="slide fade">
+                                <img src="img/fos_6.png" />
+                            </div>
+                            <div class="slide fade">
+                                <img src="img/fos_5.png" />
+                            </div>
+                            <div class="slide fade">
+                                <img src="img/fos_7.png" />
+                            </div>
+                            <div class="slide fade">
+                                <img src="img/fos_8.png" />
+                            </div>
+                            
+                                
+                    <a class="prev" onclick="plusSlides(-1)">❮</a>
+                    <a class="next" onclick="plusSlides(1)">❯</a>
+                            </div>
+                    </div>
+                <div class="video-description">
+                    <h3 class="project-title">Food Ordering System</h3>
+                    <p class="project-description">
+                        This food ordering system streamlines ordering and payment, reducing human error and boosting restaurant efficiency. Its UX goals include simplicity, speed, and visual appeal. It offering users an intuitive, efficient, and brand-reflective interface. This enhances the overall customer experience and ensures a smooth, satisfying food ordering journey.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Group work</span>
+                        <span class="tag">Figma</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="portfolio-section">
         <h2 class="section-title">Packaging Design</h2>
         <div class="video-project" data-aos="fade-up">
             <div class="packaging-container">
                 <div class="slideshow-container">
                     <div class="slide fade">
-                        <img src="packaging design.png" alt="Slide 1">
+                        <img src="img/packaging design.png" alt="Slide 1">
                     </div>
                     <div class="slide fade">
-                        <img src="packaging design2.png" alt="Slide 2">
+                        <img src="img/packaging design2.png" alt="Slide 2">
                     </div>
                     <div class="slide fade">
-                        <img src="packaging design3.png" alt="Slide 3">
+                        <img src="img/packaging design3.png" alt="Slide 3">
                     </div>
                     
                     <a class="prev" onclick="plusSlides(-1)">❮</a>
@@ -985,34 +1083,91 @@
     </section>
 
     <section class="portfolio-section">
+        <h2 class="section-title">Magazine Design</h2>
+            <div class="video-project" data-aos="fade-up">
+                    <div class="game-project"><br><br>
+                <div class="game-slideshow-container" id="gameSlideshow">
+                    <!-- Each slide has proper structure -->
+                    <div class="game-slide active">
+                        <img src="img/magazine1.png" />
+                    </div>
+                    <div class="game-slide">
+                        <img src="img/magazine2.png" />
+                    </div>
+                    <div class="game-slide">
+                        <img src="img/magazine3.png" />
+                    </div>
+                    <div class="game-slide">
+                        <img src="img/magazine4.png" />
+                    </div>
+                    <div class="game-slide">
+                        <img src="img/magazine5.png" />
+                    </div>
+                    <div class="game-slide">
+                        <img src="img/magazine6.png" />
+                    </div>
+                    <div class="game-slide">
+                        <img src="img/magazine9.png" />
+                    </div>
+                    <div class="game-slide">
+                        <img src="img/magazine8.png" />
+                    </div>
+                    <div class="game-slide">
+                        <img src="img/magazine7.png" />
+                    </div>
+                    <div class="game-slide">
+                        <img src="img/magazine10.png" />
+                    </div>
+                               
+                    <div class="game-nav-buttons">
+                        <button class="prev" onclick="plusGameSlides(-1)">❮</button>
+                        <button class="next" onclick="plusGameSlides(1)">❯</button>
+                    </div>
+                </div>
+            </div>
+                            
+                <div class="video-description">
+                    <h3 class="project-title">Circle of Life</h3>
+                    <p class="project-description">
+                        Circle of Life is a wildlife and conservation magazine featuring stories on animals, ecosystems, and environmental challenges. This issue explores Australia’s unique species, marine wonders, and life in the Arctic and Antarctica. Through vivid storytelling, it inspires readers to appreciate and protect the beauty and diversity of nature.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Group work</span>
+                        <span class="tag">Adobe InDesign</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <section class="portfolio-section">
         <h2 class="section-title">Game Development</h2>
         <div class="video-project" data-aos="fade-up">
             <div class="game-project"><br><br>
                 <div class="game-slideshow-container" id="gameSlideshow">
                     <!-- Each slide has proper structure -->
                     <div class="game-slide active">
-                        <img src="game_frontpage .png" />
+                        <img src="img/game_frontpage .png" />
                     </div>
                     <div class="game-slide">
-                        <img src="game_level1.0.png" />
+                        <img src="img/game_level1.0.png" />
                     </div>
                     <div class="game-slide">
-                        <img src="game_level1.1.png" />
+                        <img src="img/game_level1.1.png" />
                     </div>
                     <div class="game-slide">
-                        <img src="game_level1.2.png" />
+                        <img src="img/game_level1.2.png" />
                     </div>
                     <div class="game-slide">
-                        <img src="game_level1.3.png" />
+                        <img src="img/game_level1.3.png" />
                     </div>
                     <div class="game-slide">
-                        <img src="game_level1.4.png" />
+                        <img src="img/game_level1.4.png" />
                     </div>
                     <div class="game-slide">
-                        <img src="game_level1.5.png" />
+                        <img src="img/game_level1.5.png" />
                     </div>
                     <div class="game-slide">
-                        <img src="game_level1.6.png" />
+                        <img src="img/game_level1.6.png" />
                     </div>
                     
                     <div class="game-nav-buttons">
@@ -1037,7 +1192,7 @@
                     
                 </div>
             </div>
-        </div>  
+        </div>
 
 
             <div class="scroll-to-top-bubble">
