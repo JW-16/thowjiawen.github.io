@@ -839,6 +839,148 @@
             }
         }
 
+        /* === Magazine Showcase Section === */
+.magazine-showcase {
+    padding: 80px 20px;
+    
+}
+
+.magazine-title {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 50px;
+    color: #222;
+}
+
+/* === Flex Layout for Content === */
+.magazine-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+    align-items: center;
+}
+
+/* === Gallery Wrapper (no border or padding to let image grow fully) === */
+.magazine-gallery-wrapper {
+    flex: 1 1 600px;
+    max-width: 720px;
+    position: relative;
+}
+
+/* === Slider Container === */
+.magazine-slider {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+/* === Slide === */
+.magazine-slide {
+    display: none;
+    position: relative;
+    width: 100%;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.magazine-slide.active {
+    display: block;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* === IMAGE Styling === */
+/* === Change image size here: max-width / max-height if needed === */
+.magazine-slide img {
+    width: 100%;       /* full width of container */
+    height: auto;      /* maintain aspect ratio */
+    display: block;
+    border-radius: 12px;
+    object-fit: cover; /* change to 'contain' if you want full image inside view */
+}
+
+/* === Fade animation === */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* === NAVIGATION BUTTONS INSIDE IMAGE === */
+.game-nav-buttons {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transform: translateY(-50%);
+    padding: 0 10px;
+    z-index: 10;
+    pointer-events: none; /* only buttons should be interactive */
+}
+
+.game-nav-buttons button {
+    pointer-events: all;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 28px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.game-nav-buttons button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* === Info Panel === */
+.magazine-info {
+    flex: 1 1 350px;
+    max-width: 500px;
+}
+
+.magazine-project-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.magazine-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* === Tags === */
+.magazine-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.magazine-tags .tag {
+    background-color: #0066cc;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+    .magazine-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .magazine-gallery-wrapper, .magazine-info {
+        max-width: 100%;
+    }
+}
+
 
     </style>
 </head>
@@ -893,7 +1035,7 @@
         <div class="project-grid">
             <div class="project-card" data-aos="fade-up">     
                 <div class="game-project">
-                    <div class="game-slideshow-container">
+                    <div class="game-slideshow-container" id="websiteSlideshow">
                         <!-- Each slide has proper structure -->
                         <div class="game-slide active">
                             <img src="nutribite_alert.png" />
@@ -915,9 +1057,9 @@
                         </div>
                         
                         
-                        <div class="game-nav-buttons">
-                            <button class="prev" onclick="plusGameSlides(-1)">❮</button>
-                            <button class="next" onclick="plusGameSlides(1)">❯</button>
+                        <div class="game-nav-buttons active"  data-slideshow-id="nutribites">
+                            <button class="prev" onclick="plusSlides('websiteSlideshow', -1)">❮</button>
+                            <button class="next" onclick="plusSlides('websiteSlideshow', 1)">❯</button>
                         </div>
                     </div>
                 </div>
@@ -937,7 +1079,7 @@
 
             <div class="project-card" data-aos="fade-up">     
                 <div class="game-project">
-                    <div class="game-slideshow-container">
+                    <div class="game-slideshow-container" id="websiteSlideshow2">
                         <!-- Each slide has proper structure -->
                         <div class="game-slide active">
                             <img src="moonlight1.png" />
@@ -959,9 +1101,10 @@
                         </div>
                         
                         
-                        <div class="game-nav-buttons">
-                            <button class="prev" onclick="plusGameSlides(-1)">❮</button>
-                            <button class="next" onclick="plusGameSlides(1)">❯</button>
+                        <div class="game-nav-buttons"  data-slideshow-id="moonlight">
+                            <button class="prev" onclick="plusSlides('websiteSlideshow2', -1)">❮</button>
+                            <button class="next" onclick="plusSlides('websiteSlideshow2', 1)">❯</button>
+
                         </div>
                     </div>
                 </div>
@@ -1004,7 +1147,7 @@
         <h2 class="section-title">Prototype Design</h2>
             <div class="video-project" data-aos="fade-up">
                 <div class="packaging-container">
-                    <div class="slideshow-container">
+                    <div class="slideshow-container" id="packagingSlideshow">
                             <div class="slide fade">
                                 <img src="fos_1.png" />
                             </div>
@@ -1031,8 +1174,8 @@
                             </div>
                             
                                 
-                    <a class="prev" onclick="plusSlides(-1)">❮</a>
-                    <a class="next" onclick="plusSlides(1)">❯</a>
+                    <a class="prev" onclick="plusSlides('packagingSlideshow', -1)">❮</a>
+                    <a class="next" onclick="plusSlides('packagingSlideshow', 1)">❯</a>
                             </div>
                     </div>
                 <div class="video-description">
@@ -1052,19 +1195,19 @@
         <h2 class="section-title">Packaging Design</h2>
         <div class="video-project" data-aos="fade-up">
             <div class="packaging-container">
-                <div class="slideshow-container">
+                <div class="slideshow-container" id="packagingSlideshow2">
                     <div class="slide fade">
-                        <img src="packaging design.png" alt="Slide 1">
+                        <img src="packagingdesign.png" alt="Slide 1">
                     </div>
                     <div class="slide fade">
-                        <img src="packaging design2.png" alt="Slide 2">
+                        <img src="packagingdesign2.png" alt="Slide 2">
                     </div>
                     <div class="slide fade">
-                        <img src="packaging design3.png" alt="Slide 3">
+                        <img src="packagingdesign3.png" alt="Slide 3">
                     </div>
                     
-                    <a class="prev" onclick="plusSlides(-1)">❮</a>
-                    <a class="next" onclick="plusSlides(1)">❯</a>
+                    <a class="prev" onclick="plusSlides('packagingSlideshow2', -1)">❮</a>
+                    <a class="next" onclick="plusSlides('packagingSlideshow2', 1)">❯</a>
                 </div>            </div>
             <div class="video-description">
                 <h3 class="project-title">Packaging Design - redesign Burberry Her Series
@@ -1082,62 +1225,67 @@
         </div>    
     </section>
 
-    <section class="portfolio-section">
-        <h2 class="section-title">Magazine Design</h2>
-            <div class="video-project" data-aos="fade-up">
-                    <div class="game-project"><br><br>
-                <div class="game-slideshow-container" id="gameSlideshow">
-                    <!-- Each slide has proper structure -->
-                    <div class="game-slide active">
-                        <img src="magazine1.png" />
-                    </div>
-                    <div class="game-slide">
-                        <img src="magazine2.png" />
-                    </div>
-                    <div class="game-slide">
-                        <img src="magazine3.png" />
-                    </div>
-                    <div class="game-slide">
-                        <img src="magazine4.png" />
-                    </div>
-                    <div class="game-slide">
-                        <img src="magazine5.png" />
-                    </div>
-                    <div class="game-slide">
-                        <img src="magazine6.png" />
-                    </div>
-                    <div class="game-slide">
-                        <img src="magazine9.png" />
-                    </div>
-                    <div class="game-slide">
-                        <img src="magazine8.png" />
-                    </div>
-                    <div class="game-slide">
-                        <img src="magazine7.png" />
-                    </div>
-                    <div class="game-slide">
-                        <img src="magazine10.png" />
-                    </div>
-                               
-                    <div class="game-nav-buttons">
-                        <button class="prev" onclick="plusGameSlides(-1)">❮</button>
-                        <button class="next" onclick="plusGameSlides(1)">❯</button>
-                    </div>
+    <section class="magazine-showcase">
+    <h2 class="magazine-title">Magazine Design</h2>
+
+    <div class="magazine-content" data-aos="fade-up">
+        
+        <div class="magazine-gallery-wrapper"><br><br>
+            <div class="magazine-slider" id="magazineSlideshow">
+                <!-- Magazine Slides -->
+                <div class="magazine-slide active">
+                    <img src="magazine1.png" alt="Magazine Page 1">
+                </div>
+                <div class="magazine-slide">
+                    <img src="magazine2.png" alt="Magazine Page 2">
+                </div>
+                <div class="magazine-slide">
+                    <img src="magazine3.png" alt="Magazine Page 3">
+                </div>
+                <div class="magazine-slide">
+                    <img src="magazine4.png" alt="Magazine Page 4">
+                </div>
+                <div class="magazine-slide">
+                    <img src="magazine5.png" alt="Magazine Page 5">
+                </div>
+                <div class="magazine-slide">
+                    <img src="magazine6.png" alt="Magazine Page 6">
+                </div>
+                <div class="magazine-slide">
+                    <img src="magazine9.png" alt="Magazine Page 9">
+                </div>
+                <div class="magazine-slide">
+                    <img src="magazine8.png" alt="Magazine Page 8">
+                </div>
+                <div class="magazine-slide">
+                    <img src="magazine7.png" alt="Magazine Page 7">
+                </div>
+                <div class="magazine-slide">
+                    <img src="magazine10.png" alt="Magazine Page 10">
+                </div>
+
+                <!-- Navigation Buttons (Class names unchanged per request) -->
+                <div class="game-nav-buttons">
+                    <button class="prev" onclick="plusSlides('magazineSlideshow', -1)">❮</button>
+                    <button class="next" onclick="plusSlides('magazineSlideshow', 1)">❯</button>
                 </div>
             </div>
-                            
-                <div class="video-description">
-                    <h3 class="project-title">Circle of Life</h3>
-                    <p class="project-description">
-                        Circle of Life is a wildlife and conservation magazine featuring stories on animals, ecosystems, and environmental challenges. This issue explores Australia’s unique species, marine wonders, and life in the Arctic and Antarctica. Through vivid storytelling, it inspires readers to appreciate and protect the beauty and diversity of nature.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Group work</span>
-                        <span class="tag">Adobe InDesign</span>
-                    </div>
+
+            <div class="video-description">
+                <h3 class="project-title">Circle of Life 
+                </h3>
+                <p class="project-description">
+                    <strong>Circle of Life</strong> is a wildlife and conservation magazine featuring stories on animals, ecosystems, and environmental challenges. This issue explores Australia’s unique species, marine wonders, and life in the Arctic and Antarctica. Through vivid storytelling, it inspires readers to appreciate and protect the beauty and diversity of nature.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Group Work</span>
+                    <span class="tag">Adobe Indesign</span>
+                                     
                 </div>
             </div>
-        </section>
+
+    </div>
+</section>
 
     <section class="portfolio-section">
         <h2 class="section-title">Game Development</h2>
@@ -1171,9 +1319,10 @@
                     </div>
                     
                     <div class="game-nav-buttons">
-                        <button class="prev" onclick="plusGameSlides(-1)">❮</button>
-                        <button class="next" onclick="plusGameSlides(1)">❯</button>
+                        <button class="prev" onclick="plusGameDevSlides(-1)">❮</button>
+                        <button class="next" onclick="plusGameDevSlides(1)">❯</button>
                     </div>
+
                 </div>
             </div>
             <div class="video-description">
@@ -1370,52 +1519,296 @@
             });
         });
 
-        let slideIndex = 1;
-        showSlides(slideIndex);
+        // ===== For PACKAGING SLIDESHOW (slide) =====
+        let packagingSlideIndex = 1;
+        showPackagingSlides(packagingSlideIndex);
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
+        function plusPackagingSlides(n) {
+            showPackagingSlides(packagingSlideIndex += n);
         }
 
-        function showSlides(n) {
+        function showPackagingSlides(n) {
             let i;
-            let slides = document.getElementsByClassName("slide");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
+            let slides = document.querySelectorAll(".packaging-container .slide");
+            if (n > slides.length) {packagingSlideIndex = 1}
+            if (n < 1) {packagingSlideIndex = slides.length}
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
-            slides[slideIndex-1].style.display = "block";
+            slides[packagingSlideIndex-1].style.display = "block";
         }
 
-        // Auto-advance slides (optional)
-        setInterval(() => plusSlides(1), 5000);
-        
-        // ===== For GAME SLIDESHOW (game-slide) =====
+        // ===== For WEBSITE DESIGN SLIDESHOWS (game-slide) =====
+        let websiteSlideIndex = 1;
+        showWebsiteSlides(websiteSlideIndex);
+
+        function plusWebsiteSlides(n) {
+            showWebsiteSlides(websiteSlideIndex += n);
+        }
+
+        function showWebsiteSlides(n) {
+            const slides = document.querySelectorAll(".project-card .game-slide");
+            
+            if (n > slides.length) { websiteSlideIndex = 1; }
+            if (n < 1) { websiteSlideIndex = slides.length; }
+            
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove("active"));
+            
+            // Show current slide
+            slides[websiteSlideIndex - 1].classList.add("active");
+        }
+
+        // ===== For GAME DEVELOPMENT SLIDESHOW =====
         let gameSlideIndex = 1;
-        showGameSlides(gameSlideIndex);
+        showGameDevSlides(gameSlideIndex);
 
-        function plusGameSlides(n) {
-            showGameSlides(gameSlideIndex += n);
+        function plusGameDevSlides(n) {
+            showGameDevSlides(gameSlideIndex += n);
         }
 
-        function showGameSlides(n) {
-            const gameSlides = document.getElementsByClassName("game-slide");
+        function showGameDevSlides(n) {
+            const slides = document.querySelectorAll("#gameSlideshow .game-slide");
             
-            if (n > gameSlides.length) { gameSlideIndex = 1; }
-            if (n < 1) { gameSlideIndex = gameSlides.length; }
+            if (n > slides.length) { gameSlideIndex = 1; }
+            if (n < 1) { gameSlideIndex = slides.length; }
             
-            // Hide all game slides
-            for (let i = 0; i < gameSlides.length; i++) {
-                gameSlides[i].classList.remove("active");
-            }
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove("active"));
             
-            // Show current game slide
-            gameSlides[gameSlideIndex - 1].classList.add("active");
+            // Show current slide
+            slides[gameSlideIndex - 1].classList.add("active");
         }
 
-        // Auto-advance game slides (optional)
-        setInterval(() => plusGameSlides(1), 5000);
+        // ===== For MAGAZINE SLIDESHOW =====
+        let magazineSlideIndex = 1;
+        showMagazineSlides(magazineSlideIndex);
+
+        function plusMagazineSlides(n) {
+            showMagazineSlides(magazineSlideIndex += n);
+        }
+
+        function showMagazineSlides(n) {
+            const slides = document.querySelectorAll("#magazineSlideshow .magazine-slide");
+            
+            if (n > slides.length) { magazineSlideIndex = 1; }
+            if (n < 1) { magazineSlideIndex = slides.length; }
+            
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove("active"));
+            
+            // Show current slide
+            slides[magazineSlideIndex - 1].classList.add("active");
+        }
+
+        // Initialize all slideshows when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize packaging slideshow
+            showPackagingSlides(1);
+            
+            // Initialize website design slideshows
+            showWebsiteSlides(1);
+            
+            // Initialize game development slideshow
+            showGameDevSlides(1);
+            
+            // Initialize magazine slideshow
+            showMagazineSlides(1);
+        });
+
+        // Auto-advance slides (optional - you can remove these if you don't want auto-advance)
+        // setInterval(() => plusPackagingSlides(1), 5000);
+        // setInterval(() => plusWebsiteSlides(1), 5000);
+        // setInterval(() => plusGameDevSlides(1), 5000);
+        // setInterval(() => plusMagazineSlides(1), 5000);
+
+// Store active indexes for each slideshow container
+const slideIndexes = new WeakMap();
+
+// Attach event listeners to all nav buttons
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.game-nav-buttons').forEach(nav => {
+        const container = nav.closest('.game-slideshow-container');
+
+        // Previous button
+        nav.querySelector('.prev').addEventListener('click', () => {
+            changeSlide(container, -1);
+        });
+
+        // Next button
+        nav.querySelector('.next').addEventListener('click', () => {
+            changeSlide(container, 1);
+        });
+
+        // Initialize first slide active
+        const slides = container.querySelectorAll('.game-slide');
+        if (slides.length) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[0].classList.add('active');
+            slideIndexes.set(container, 0);
+        }
+    });
+});
+
+// Slide change function
+function changeSlide(container, step) {
+    const slides = container.querySelectorAll('.game-slide');
+    if (!slides.length) return;
+
+    let currentIndex = slideIndexes.get(container) ?? 0;
+
+    slides[currentIndex].classList.remove('active');
+
+    const newIndex = (currentIndex + step + slides.length) % slides.length;
+
+    slides[newIndex].classList.add('active');
+    slideIndexes.set(container, newIndex);
+}
+
+
+
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.magazine-slide');
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+        });
+
+        slides[index].classList.add('active');
+    }
+
+    function plusGameSlides(step) {
+        currentSlideIndex += step;
+        if (currentSlideIndex >= slides.length) currentSlideIndex = 0;
+        if (currentSlideIndex < 0) currentSlideIndex = slides.length - 1;
+        showSlide(currentSlideIndex);
+    }
+
+    // Initial load
+    showSlide(currentSlideIndex);
+
+    const slideshows = {};
+
+    function plusGameSlides(n, slideshowId) {
+        const container = document.querySelector(`.game-slideshow-container[data-slideshow-id="${slideshowId}"]`);
+        const slides = container.querySelectorAll('.game-slide');
+
+        if (!slideshows[slideshowId]) {
+            slideshows[slideshowId] = 0;
+        }
+
+        slides[slideshows[slideshowId]].classList.remove('active');
+
+        slideshows[slideshowId] = (slideshows[slideshowId] + n + slides.length) % slides.length;
+
+        slides[slideshows[slideshowId]].classList.add('active');
+    }
+
+    // === PROTOTYPE DESIGN SLIDESHOW ===
+    let prototypeIndex = 1;
+    function showPrototypeSlide(n) {
+        const container = document.getElementById('packagingSlideshow');
+        if (!container) return;
+        const slides = container.querySelectorAll('.slide');
+        if (!slides.length) return;
+        if (n > slides.length) prototypeIndex = 1;
+        if (n < 1) prototypeIndex = slides.length;
+        slides.forEach((slide, i) => {
+            slide.style.display = 'none';
+        });
+        slides[prototypeIndex - 1].style.display = '';
+    }
+    function plusPrototypeSlide(n) {
+        showPrototypeSlide(prototypeIndex += n);
+    }
+    // === PACKAGING DESIGN SLIDESHOW ===
+    let packagingIndex = 1;
+    function showPackagingSlide(n) {
+        const container = document.getElementById('packagingSlideshow2');
+        if (!container) return;
+        const slides = container.querySelectorAll('.slide');
+        if (!slides.length) return;
+        if (n > slides.length) packagingIndex = 1;
+        if (n < 1) packagingIndex = slides.length;
+        slides.forEach((slide, i) => {
+            slide.style.display = 'none';
+        });
+        slides[packagingIndex - 1].style.display = '';
+    }
+    function plusPackagingSlide(n) {
+        showPackagingSlide(packagingIndex += n);
+    }
+    // === MAGAZINE DESIGN SLIDESHOW ===
+    let magazineIndex = 1;
+    function showMagazineSlide(n) {
+        const container = document.getElementById('magazineSlideshow');
+        if (!container) return;
+        const slides = container.querySelectorAll('.magazine-slide');
+        if (!slides.length) return;
+        if (n > slides.length) magazineIndex = 1;
+        if (n < 1) magazineIndex = slides.length;
+        slides.forEach((slide, i) => {
+            slide.style.display = 'none';
+            slide.classList.remove('active');
+        });
+        slides[magazineIndex - 1].style.display = '';
+        slides[magazineIndex - 1].classList.add('active');
+    }
+    function plusMagazineSlide(n) {
+        showMagazineSlide(magazineIndex += n);
+    }
+    // === INIT ALL ON DOMContentLoaded ===
+    document.addEventListener('DOMContentLoaded', function() {
+        showPrototypeSlide(prototypeIndex);
+        showPackagingSlide(packagingIndex);
+        showMagazineSlide(magazineIndex);
+    });
+
+    // Generic slideshow function that works for all slideshows
+function plusSlides(slideshowId, n) {
+    showSlides(slideshowId, n);
+}
+
+function showSlides(slideshowId, n) {
+    const slideshow = document.getElementById(slideshowId);
+    if (!slideshow) return;
+    
+    const slides = slideshow.querySelectorAll('.slide, .magazine-slide');
+    let slideIndex = parseInt(slideshow.getAttribute('data-current-index') || '1');
+    
+    slideIndex += n;
+    
+    if (slideIndex > slides.length) { slideIndex = 1; }
+    if (slideIndex < 1) { slideIndex = slides.length; }
+    
+    slideshow.setAttribute('data-current-index', slideIndex);
+    
+    // Hide all slides
+    slides.forEach(slide => {
+        slide.style.display = 'none';
+        slide.classList.remove('active');
+    });
+    
+    // Show current slide
+    const currentSlide = slides[slideIndex - 1];
+    currentSlide.style.display = 'block';
+    currentSlide.classList.add('active');
+}
+
+// Initialize all slideshows on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const slideshows = document.querySelectorAll('.slideshow-container, .magazine-slider');
+    slideshows.forEach(slideshow => {
+        slideshow.setAttribute('data-current-index', '1');
+        const slides = slideshow.querySelectorAll('.slide, .magazine-slide');
+        if (slides.length > 0) {
+            slides[0].style.display = 'block';
+            slides[0].classList.add('active');
+        }
+    });
+});
+
     </script>
 </body>
 </html>
