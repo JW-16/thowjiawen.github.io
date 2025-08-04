@@ -724,24 +724,6 @@
                 height: 300px;
             }
         }
-        /* Hobbies Section */
-        .hobbies {
-            background: transparent;
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hobbies::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            
-            pointer-events: none;
-        }
         
         .section-title {
             text-align: center;
@@ -1740,32 +1722,6 @@
                 </div>
             </div>
         </section>
-        <!-- Hobbies Section -->
-        <section id="hobbies" class="hobbies">
-            <h2 class="section-title">My Hobbies</h2>
-            <div class="hobbies-container">
-                <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-plane"></i>
-                    </div>
-                    <h3>Travelling</h3>
-                    <p>I love exploring new cultures and landscapes. My recent trips include Malaysia Island, Thailand, and Korea. Travel inspires my design work by exposing me to different aesthetics and perspectives. I particularly enjoy documenting my travels through photography local architecture.</p>
-                </div>
-                <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h3>Reading</h3>
-                    <p>I enjoy reading psychology, and fiction. Some favorites include "Don't Make Me Think" by Steve Krug and "The Design of Everyday Things" by Don Norman</p>
-                </div>
-                <div class="hobby-card">
-                    <div class="hobby-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>Digital Art</h3>
-                    <p>I learned digital illustration through a previous assignment, which sparked my interest in visual design. It encouraged me to explore various styles and techniques that now influence my creative work.</p>                </div>
-            </div>
-        </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -2024,38 +1980,6 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const sectionTitle = document.querySelector('.hobbies .section-title');
-            const hobbyCards = document.querySelectorAll('.hobby-card');
-            
-            // Intersection Observer for hobbies section
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Animate title
-                        sectionTitle.classList.add('active');
-                        
-                        // Animate cards with staggered delay
-                        hobbyCards.forEach((card, index) => {
-                            setTimeout(() => {
-                                card.classList.add('active');
-                            }, index * 200);
-                        });
-                        
-                        // Optional: Unobserve after animation
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.2,
-                rootMargin: '0px 0px -100px 0px'
-            });
-            
-            if (sectionTitle) {
-                observer.observe(document.querySelector('.hobbies'));
-            }
-        });
-
         AOS.init({
             duration: 800,
             easing: 'ease-in-out',
@@ -2255,4 +2179,5 @@
     </script>
 </body>
 </html>
+
 
