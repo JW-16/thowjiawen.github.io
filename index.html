@@ -1259,7 +1259,7 @@
     <!-- Navigation -->
     <nav id="main-nav">
         <div class="nav-container">
-            <a href="#home" class="logo">THOW JIA WEN</a>
+            <a href="#home" class="logo" >THOW JIA WEN</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -1288,7 +1288,7 @@
     
     <div class="overlay" id="overlay"></div>
 
-    <header id="home">
+    <header id="home" section id="home">
         <div class="header-bg"></div>
         <div class="header-content">
             <div id="line1" class="typing-line"></div>
@@ -1301,7 +1301,7 @@
 
     <main class="main-wrapper">
         <!-- About Section -->
-        <section id="about" class="about">
+        <section id="about" class="about" section id="about">
             <h2 class="about_section-title">About Me</h2>
             <div class="about-content">
                 <!-- Profile Picture and Basic Info -->
@@ -1434,7 +1434,7 @@
         </section>
 
         <!-- Experience Section -->
-        <section id="experience" class="experience">
+        <section id="experience" class="experience" section id="experience">
             <h2 class="experience_section-title">Work Experience</h2>
             <div class="experience-container">
                 <!-- Experience Item 1 -->
@@ -1515,7 +1515,7 @@
         </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact" section id="contact">
         <div class="contact-wave">
             <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="#fdb5b7"></path>
@@ -1966,6 +1966,49 @@
             // Make toggleDetails available globally
             window.toggleDetails = toggleDetails;
         });
+
+        // Handle navigation between pages with hash links
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if there's a hash in the URL when loading
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1); // Remove the #
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            // Small delay to ensure page is fully loaded
+            setTimeout(() => {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+    }
+    
+    // Handle clicks on navigation links
+    document.querySelectorAll('a[href^="index.html#"], a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const href = this.getAttribute('href');
+            
+            // If we're on a different page, navigate first
+            if (href.includes('index.html') && !window.location.pathname.includes('index.html')) {
+                window.location.href = href;
+                return;
+            }
+            
+            // If we're on the same page, just scroll
+            const targetId = href.split('#')[1];
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
 
     </script>
 </body>
